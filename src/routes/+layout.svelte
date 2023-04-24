@@ -12,12 +12,12 @@
       url: "/",
     },
     {
-      label: "Banen",
-      url: "/banen",
-    },
-    {
       label: "Klubben",
       url: "/klubben",
+    },
+    {
+      label: "Banen",
+      url: "/banen",
     },
     {
       label: "Lost & Found",
