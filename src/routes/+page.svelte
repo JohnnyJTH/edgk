@@ -3,7 +3,8 @@
   import type { PageData } from "./$types";
 
   export let data: PageData;
-  $: ({ events } = data);
+  let { events } = data;
+  events.length = 5;
 
   let innerHeight: number = 0;
 
@@ -44,7 +45,7 @@
   <header class="flex justify-between items-center">
     <div class="space-y-4">
       <h2>Kommende Events</h2>
-      <p>Her kan du se kommende events i klubben.</p>
+      <p>Her kan du se de næste 5 events i klubben.</p>
     </div>
     <a href="/events" class="btn variant-soft-primary">Se alle events →</a>
   </header>
