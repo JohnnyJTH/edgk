@@ -53,15 +53,11 @@
 
 <AppShell slotPageHeader="sticky top-0 z-10">
   <svelte:fragment slot="pageHeader">
-    <header
-      id="page-header"
+    <div
+      id="header"
       class="bg-surface-900/75 border-b border-surface-500/20 backdrop-blur-lg p-4 py-6"
     >
       <div class="flex flex-row justify-between items-center gap-4">
-        <!-- <a href="/" class="unstyled"
-          ><strong class="text-xl uppercase">Eghjorten Disc Golf Klub</strong
-          ></a
-        > -->
         <a href="/" class="unstyled">
           <img
             src="/images/edgk-white.png"
@@ -85,15 +81,13 @@
           </button>
         </div>
       </div>
-    </header>
+    </div>
   </svelte:fragment>
 
-  <main class="flex-auto">
-    <slot />
-  </main>
+  <slot />
 
   <svelte:fragment slot="pageFooter">
-    <footer class="mt-24">
+    <div class="mt-24">
       <svg
         id="svgWaves"
         xmlns="http://www.w3.org/2000/svg"
@@ -101,25 +95,19 @@
         viewBox="0 0 1920 180"
         shape-rendering="geometricPrecision"
         text-rendering="geometricPrecision"
-        ><g
-          id="layerBack"
-          transform="translate(202.286714,-24.510398)"
+        ><g id="layerBack" transform="translate(202.286714,-24.510398)"
           ><path
             d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
             transform="translate(-1073.286712,-455.300696)"
             class="fill-primary-900"
           /></g
-        ><g
-          id="layerMiddle"
-          transform="translate(1053.286714,15.300701)"
+        ><g id="layerMiddle" transform="translate(1053.286714,15.300701)"
           ><path
             d="M-0.000002,523.297489c0,0,200.524017,31.863345,432.838428,31.863345s445.065504-52.027972,621.13537-52.027972s359.475983,45.314685,533.100437,45.314685s293.449783-25.150058,445.065503-25.150058s313.013099,25.150058,484.192139,25.150058q171.17904,0,281.222708-10.06993l2.445415,261.622378h-2800v-276.702506Z"
             transform="translate(-1073.286712,-455.300696)"
             class="fill-primary-700"
           /></g
-        ><g
-          id="layerFront"
-          transform="translate(193.286714,45.300701)"
+        ><g id="layerFront" transform="translate(193.286714,45.300701)"
           ><path
             d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
             transform="translate(-1073.286712,-455.300696)"
@@ -137,10 +125,14 @@
               Disc Golf rundt om Eghjorten i Hillerød
             </p>
             <nav class="space-x-4">
-              <a href="https://www.instagram.com/eghjorten_dgk/" target="_blank"
+              <a
+                title="EDGK Instagram"
+                href="https://www.instagram.com/eghjorten_dgk/"
+                target="_blank"
                 ><i class="text-white bi bi-instagram text-xl" /></a
               >
               <a
+                title="EDGK Facebook"
                 href="https://www.facebook.com/EghjortenDiscGolfKlubHillerod"
                 target="_blank"
                 ><i class="text-white bi bi-facebook text-xl" /></a
@@ -190,7 +182,7 @@
           </section>
         </div>
       </div>
-    </footer>
+    </div>
   </svelte:fragment>
 </AppShell>
 

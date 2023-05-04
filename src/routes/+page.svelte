@@ -10,7 +10,7 @@
 
   function heroCalc() {
     const headerHeight =
-      document.getElementById("page-header")?.clientHeight || 0;
+      document.getElementById("header")?.clientHeight || 0;
     const hero = document.getElementById("hero");
     if (hero) {
       hero.style.marginTop = `-${headerHeight}px`;

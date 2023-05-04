@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { message, superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
-import { toastStore } from '@skeletonlabs/skeleton';
 import { SENDGRID_API_KEY } from '$env/static/private';
 import { render } from 'svelte-email';
 import Tilmeld from '$lib/emails/Tilmeld.svelte';
@@ -50,9 +49,10 @@ export const actions: Actions = {
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SENDGRID_API_KEY}` },
             body: JSON.stringify({
                 personalizations: [{
-                    to: [{ email: 'johanohly@gmail.com', name: 'Johan Ohly' }],
+                    to: [{ email: 'edgk@ohly.dk', name: 'EDGK' }],
                 }],
                 from: { email: 'edgk@ohly.dk', name: 'EDGK' },
+                to: [{ email: form.data.email, name: form.data.name }],
                 subject: 'Ny tilmelding til klubben',
                 content: [
                     {
