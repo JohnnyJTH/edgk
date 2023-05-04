@@ -3,7 +3,7 @@
   import "@skeletonlabs/skeleton/styles/all.css";
   import "../app.postcss";
 
-  import { AppShell, Drawer, drawerStore } from "@skeletonlabs/skeleton";
+  import { AppShell, Drawer, Toast, drawerStore } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
 
   const links = [
@@ -35,6 +35,8 @@
   <title>Eghjorten Disc Golf Klub</title>
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 </svelte:head>
+
+<Toast />
 
 <Drawer width="w-auto">
   <ul class="flex flex-col p-4 mt-4 space-y-4">
@@ -105,7 +107,7 @@
           ><path
             d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
             transform="translate(-1073.286712,-455.300696)"
-            class="fill-secondary-900"
+            class="fill-primary-900"
           /></g
         ><g
           id="layerMiddle"
@@ -113,7 +115,7 @@
           ><path
             d="M-0.000002,523.297489c0,0,200.524017,31.863345,432.838428,31.863345s445.065504-52.027972,621.13537-52.027972s359.475983,45.314685,533.100437,45.314685s293.449783-25.150058,445.065503-25.150058s313.013099,25.150058,484.192139,25.150058q171.17904,0,281.222708-10.06993l2.445415,261.622378h-2800v-276.702506Z"
             transform="translate(-1073.286712,-455.300696)"
-            class="fill-secondary-500"
+            class="fill-primary-700"
           /></g
         ><g
           id="layerFront"
