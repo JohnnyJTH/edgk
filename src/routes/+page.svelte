@@ -23,7 +23,7 @@
 
 <div
   id="hero"
-  class="w-screen h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/ForestOverview.png')]"
+  class="w-screen h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/HoleEighteen.jpg')]"
 >
   <div
     class="relative top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-center"
@@ -68,8 +68,8 @@
   </section>
   <section class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center">
     <img
-      alt="Hul 8 på banen"
-      src="/images/HoleEight.jpg"
+      alt="Hul 1 på banen"
+      src="/images/HoleOne.jpg"
       class="w-full aspect-video flex justify-center items-center rounded-container-token shadow-lg"
     />
     <div class="pt-4 lg:p-10 space-y-4">
@@ -104,7 +104,7 @@
   <section class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center">
     <img
       alt="Hul 7 på banen"
-      src="/images/HoleSeven.jpg"
+      src="/images/LostFound.jpg"
       class="w-full aspect-video flex justify-center items-center rounded-container-token shadow-lg"
     />
     <div class="pt-4 lg:p-10 space-y-4">

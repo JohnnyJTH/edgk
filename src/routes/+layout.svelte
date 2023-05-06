@@ -148,7 +148,7 @@
             <nav class="flex flex-col space-y-4">
               <a
                 class="unstyled"
-                href="https://www.hillerod.dk/borger/kultur-idraet-og-oplevelser/ud-i-naturen/andre-aktiviteter-og-sjov-i-naturen/eghjorten-disc-golf-bane/"
+                href="https://www.hillerod.dk/service-og-selvbetjening/foreninger-kultur-og-fritidsliv/ud-i-naturen/"
                 target="_blank">Hillerød Kommune</a
               >
               <a
