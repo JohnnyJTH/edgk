@@ -103,7 +103,7 @@
   </section>
   <section class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center">
     <img
-      alt="Hul 7 på banen"
+      alt="Lost and found kassen"
       src="/images/LostFound.jpg"
       class="w-full aspect-video flex justify-center items-center rounded-container-token shadow-lg"
     />
