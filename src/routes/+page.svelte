@@ -1,10 +1,15 @@
 <script lang="ts">
   import { dateFormatter } from "$lib/format";
+  import { heroImageStore } from "$lib/stores";
   import type { PageData } from "./$types";
 
   export let data: PageData;
   let { events } = data;
   events.length = 5;
+
+  let heroElement: HTMLDivElement;
+  $: if (heroElement)
+    heroElement.style.backgroundImage = `url(${$heroImageStore})`;
 
   let innerHeight: number = 0;
 
@@ -22,8 +27,9 @@
 <svelte:window bind:innerHeight />
 
 <div
+  bind:this={heroElement}
   id="hero"
-  class="w-screen h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/HoleEighteen.jpg')]"
+  class="w-screen h-screen bg-center bg-no-repeat bg-cover"
 >
   <div
     class="relative top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-center"
@@ -70,6 +76,7 @@
     <img
       alt="Hul 1 på banen"
       src="/images/HoleOne.jpg"
+      loading="lazy"
       class="w-full aspect-video flex justify-center items-center rounded-container-token shadow-lg"
     />
     <div class="pt-4 lg:p-10 space-y-4">
@@ -105,6 +112,7 @@
     <img
       alt="Lost and found kassen"
       src="/images/LostFound.jpg"
+      loading="lazy"
       class="w-full aspect-video flex justify-center items-center rounded-container-token shadow-lg"
     />
     <div class="pt-4 lg:p-10 space-y-4">

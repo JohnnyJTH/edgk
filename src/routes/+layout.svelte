@@ -3,8 +3,16 @@
   import "@skeletonlabs/skeleton/styles/all.css";
   import "../app.postcss";
 
-  import { AppShell, Drawer, Toast, drawerStore } from "@skeletonlabs/skeleton";
+  import {
+    AppShell,
+    Drawer,
+    ProgressRadial,
+    Toast,
+    drawerStore,
+  } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
+  import { heroImageStore } from "$lib/stores";
+  import { onMount } from "svelte";
 
   const links = [
     {
@@ -29,6 +37,13 @@
     url === "/" && $page.url.pathname === "/"
       ? true
       : url !== "/" && $page.url.pathname.includes(url);
+
+  onMount(async () => {
+    if ($heroImageStore) return;
+    const response = await fetch("/images/HoleEighteen.jpg");
+    const url = URL.createObjectURL(await response.blob());
+    heroImageStore.set(url);
+  });
 </script>
 
 <svelte:head>
@@ -51,140 +66,157 @@
   </ul>
 </Drawer>
 
-<AppShell slotPageHeader="sticky top-0 z-10">
-  <svelte:fragment slot="pageHeader">
+{#if !$heroImageStore && $page.url.pathname === "/"}
+  <div class="relative w-screen h-screen">
     <div
-      id="header"
-      class="bg-surface-900/75 border-b border-surface-500/20 backdrop-blur-lg p-4 py-6"
+      class="absolute w-40 h-40 top-[50%] left-[50%]"
+      style="margin: -10rem 0 0 -10rem;"
     >
-      <div class="flex flex-row justify-between items-center gap-4">
-        <a href="/" class="unstyled">
-          <img
-            src="/images/edgk-white.png"
-            alt="Eghjorten Disc Golf Klub"
-            class="h-12"
-          />
-        </a>
-        <div class="hidden lg:flex gap-2">
-          {#each links as link}
-            <a
-              href={link.url}
-              class="btn btn-sm {isCurrentPage(link.url)
-                ? 'variant-filled shadow-[0_0_10px_10px] shadow-white/5'
-                : 'hover:variant-soft-primary'}">{@html link.label}</a
-            >
-          {/each}
-        </div>
-        <div class="flex lg:hidden gap-2">
-          <button title="Open drawer" on:click={() => drawerStore.open()}>
-            <i class="text-4xl bi bi-list" />
-          </button>
-        </div>
-      </div>
+      <ProgressRadial
+        stroke={100}
+        meter="stroke-primary-500"
+        track="stroke-secondary-700/50"
+      />
     </div>
-  </svelte:fragment>
-
-  <slot />
-
-  <svelte:fragment slot="pageFooter">
-    <div class="mt-24">
-      <svg
-        id="svgWaves"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 1920 180"
-        shape-rendering="geometricPrecision"
-        text-rendering="geometricPrecision"
-        ><g id="layerBack" transform="translate(202.286714,-24.510398)"
-          ><path
-            d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
-            transform="translate(-1073.286712,-455.300696)"
-            class="fill-primary-900"
-          /></g
-        ><g id="layerMiddle" transform="translate(1053.286714,15.300701)"
-          ><path
-            d="M-0.000002,523.297489c0,0,200.524017,31.863345,432.838428,31.863345s445.065504-52.027972,621.13537-52.027972s359.475983,45.314685,533.100437,45.314685s293.449783-25.150058,445.065503-25.150058s313.013099,25.150058,484.192139,25.150058q171.17904,0,281.222708-10.06993l2.445415,261.622378h-2800v-276.702506Z"
-            transform="translate(-1073.286712,-455.300696)"
-            class="fill-primary-700"
-          /></g
-        ><g id="layerFront" transform="translate(193.286714,45.300701)"
-          ><path
-            d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
-            transform="translate(-1073.286712,-455.300696)"
-            class="fill-primary-500"
-          /></g
-        ></svg
+  </div>
+{:else}
+  <AppShell slotPageHeader="sticky top-0 z-10">
+    <svelte:fragment slot="pageHeader">
+      <div
+        id="header"
+        class="bg-surface-900/75 border-b border-surface-500/20 backdrop-blur-lg p-4 py-6"
       >
-      <div class="bg-primary-500 px-8 py-16">
-        <div
-          class="max-w-content mx-auto space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-12"
-        >
-          <section class="space-y-4">
-            <img src="/images/edgk-white.png" alt="EDGK Logo" class="h-20" />
-            <p class="text-base my-4">
-              Disc Golf rundt om Eghjorten i Hillerød
-            </p>
-            <nav class="space-x-4">
+        <div class="flex flex-row justify-between items-center gap-4">
+          <a href="/" class="unstyled">
+            <img
+              src="/images/edgk-white.png"
+              alt="Eghjorten Disc Golf Klub"
+              class="h-12"
+            />
+          </a>
+          <div class="hidden lg:flex gap-2">
+            {#each links as link}
               <a
-                title="EDGK Instagram"
-                href="https://www.instagram.com/eghjorten_dgk/"
-                target="_blank"
-                ><i class="text-white bi bi-instagram text-xl" /></a
+                href={link.url}
+                class="btn btn-sm {isCurrentPage(link.url)
+                  ? 'variant-filled shadow-[0_0_10px_10px] shadow-white/5'
+                  : 'hover:variant-soft-primary'}">{@html link.label}</a
               >
-              <a
-                title="EDGK Facebook"
-                href="https://www.facebook.com/EghjortenDiscGolfKlubHillerod"
-                target="_blank"
-                ><i class="text-white bi bi-facebook text-xl" /></a
-              >
-            </nav>
-          </section>
-          <section class="hidden lg:block">
-            <p
-              class="text-base font-bold mb-4 pb-4 border-b border-emerald-400"
-            >
-              Sponsorer
-            </p>
-            <nav class="flex flex-col space-y-4">
-              <a
-                class="unstyled"
-                href="https://www.hillerod.dk/service-og-selvbetjening/foreninger-kultur-og-fritidsliv/ud-i-naturen/"
-                target="_blank">Hillerød Kommune</a
-              >
-              <a
-                class="unstyled"
-                href="http://naturstyrelsen.dk/naturoplevelser/naturskoler/hovedstaden/eghjorten/"
-                target="_blank">Naturstyrelsen</a
-              >
-              <a class="unstyled" href="http://skovgrillen.dk/" target="_blank"
-                >Skovgrillen</a
-              >
-            </nav>
-          </section>
-          <section class="hidden lg:block">
-            <p
-              class="text-base font-bold mb-4 pb-4 border-b border-emerald-400"
-            >
-              Kontakt
-            </p>
-            <nav class="flex flex-col space-y-4">
-              <div class="flex flex-col">
-                <span class="font-bold">Kontakt Bestyrelsen</span>
-                <a class="unstyled" href="mailto:eghjortendgk@gmail.com"
-                  >eghjortendgk@gmail.com</a
-                >
-              </div>
-              <div class="flex flex-col">
-                <span class="font-bold">Postaddresse</span>
-                Eghjorten Disc Golf Klub - Hillerød c/o
-              </div>
-            </nav>
-          </section>
+            {/each}
+          </div>
+          <div class="flex lg:hidden gap-2">
+            <button title="Open drawer" on:click={() => drawerStore.open()}>
+              <i class="text-4xl bi bi-list" />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </svelte:fragment>
-</AppShell>
+    </svelte:fragment>
+
+    <slot />
+
+    <svelte:fragment slot="pageFooter">
+      <div class="mt-24">
+        <svg
+          id="svgWaves"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 1920 180"
+          shape-rendering="geometricPrecision"
+          text-rendering="geometricPrecision"
+          ><g id="layerBack" transform="translate(202.286714,-24.510398)"
+            ><path
+              d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
+              transform="translate(-1073.286712,-455.300696)"
+              class="fill-primary-900"
+            /></g
+          ><g id="layerMiddle" transform="translate(1053.286714,15.300701)"
+            ><path
+              d="M-0.000002,523.297489c0,0,200.524017,31.863345,432.838428,31.863345s445.065504-52.027972,621.13537-52.027972s359.475983,45.314685,533.100437,45.314685s293.449783-25.150058,445.065503-25.150058s313.013099,25.150058,484.192139,25.150058q171.17904,0,281.222708-10.06993l2.445415,261.622378h-2800v-276.702506Z"
+              transform="translate(-1073.286712,-455.300696)"
+              class="fill-primary-700"
+            /></g
+          ><g id="layerFront" transform="translate(193.286714,45.300701)"
+            ><path
+              d="M-0.000002,523.297489c0,0,193.187772-28.556236,425.502183-28.556236s435.283846,60.419581,611.353713,60.419581s332.576418-31.863345,506.200872-31.863345s308.122272,45.289918,459.737992,45.289918s286.113535-45.289918,457.292575-45.289918q171.17904,0,337.46725,15.080128l2.445415,261.622378h-2800v-276.702506Z"
+              transform="translate(-1073.286712,-455.300696)"
+              class="fill-primary-500"
+            /></g
+          ></svg
+        >
+        <div class="bg-primary-500 px-8 py-16">
+          <div
+            class="max-w-content mx-auto space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-12"
+          >
+            <section class="space-y-4">
+              <img src="/images/edgk-white.png" alt="EDGK Logo" class="h-20" />
+              <p class="text-base my-4">
+                Disc Golf rundt om Eghjorten i Hillerød
+              </p>
+              <nav class="space-x-4">
+                <a
+                  title="EDGK Instagram"
+                  href="https://www.instagram.com/eghjorten_dgk/"
+                  target="_blank"
+                  ><i class="text-white bi bi-instagram text-xl" /></a
+                >
+                <a
+                  title="EDGK Facebook"
+                  href="https://www.facebook.com/EghjortenDiscGolfKlubHillerod"
+                  target="_blank"
+                  ><i class="text-white bi bi-facebook text-xl" /></a
+                >
+              </nav>
+            </section>
+            <section class="hidden lg:block">
+              <p
+                class="text-base font-bold mb-4 pb-4 border-b border-emerald-400"
+              >
+                Sponsorer
+              </p>
+              <nav class="flex flex-col space-y-4">
+                <a
+                  class="unstyled"
+                  href="https://www.hillerod.dk/service-og-selvbetjening/foreninger-kultur-og-fritidsliv/ud-i-naturen/"
+                  target="_blank">Hillerød Kommune</a
+                >
+                <a
+                  class="unstyled"
+                  href="http://naturstyrelsen.dk/naturoplevelser/naturskoler/hovedstaden/eghjorten/"
+                  target="_blank">Naturstyrelsen</a
+                >
+                <a
+                  class="unstyled"
+                  href="http://skovgrillen.dk/"
+                  target="_blank">Skovgrillen</a
+                >
+              </nav>
+            </section>
+            <section class="hidden lg:block">
+              <p
+                class="text-base font-bold mb-4 pb-4 border-b border-emerald-400"
+              >
+                Kontakt
+              </p>
+              <nav class="flex flex-col space-y-4">
+                <div class="flex flex-col">
+                  <span class="font-bold">Kontakt Bestyrelsen</span>
+                  <a class="unstyled" href="mailto:eghjortendgk@gmail.com"
+                    >eghjortendgk@gmail.com</a
+                  >
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-bold">Postaddresse</span>
+                  Eghjorten Disc Golf Klub - Hillerød c/o
+                </div>
+              </nav>
+            </section>
+          </div>
+        </div>
+      </div>
+    </svelte:fragment>
+  </AppShell>
+{/if}
 
 <style>
   #svgWaves {
