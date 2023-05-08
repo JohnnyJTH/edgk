@@ -48,6 +48,10 @@
 
 <svelte:head>
   <title>Eghjorten Disc Golf Klub</title>
+  <meta
+    name="description"
+    content="Eghjorten Disc Golf Klub er en klub for alle, der har interesse i Disc Golf. Vi har en 18 hullers bane, der er åben for alle, og vi arrangerer løbende events for medlemmerne. "
+  />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 </svelte:head>
 
