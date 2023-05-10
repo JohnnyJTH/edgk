@@ -52,6 +52,16 @@
     name="description"
     content="Eghjorten Disc Golf Klub er en klub for alle, der har interesse i Disc Golf. Vi har en 18 hullers bane, der er åben for alle, og vi arrangerer løbende events for medlemmerne. "
   />
+  <meta name="keywords" content="Disc Golf, Eghjorten, Hillerød" />
+
+  <!-- Discord Embed -->
+  <meta content="Eghjorten Disc Golf Klub" property="og:title" />
+  <meta
+    content="Eghjorten Disc Golf Klub er en klub for alle, der har interesse i Disc Golf. Vi har en 18 hullers bane, der er åben for alle, og vi arrangerer løbende events for medlemmerne. "
+    property="og:description"
+  />
+  <meta content="/images/edgk-white.png" property="og:image" />
+  <meta name="theme-color" content="#0FBA81" />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 </svelte:head>
 
