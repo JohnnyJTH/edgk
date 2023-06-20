@@ -1,17 +1,24 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   ioredis:
     specifier: ^5.3.2
     version: 5.3.2
+  luxon:
+    specifier: ^3.3.0
+    version: 3.3.0
   svelte-email:
     specifier: ^0.0.4
     version: 0.0.4
 
 devDependencies:
   '@skeletonlabs/skeleton':
-    specifier: ^1.2.0
-    version: 1.2.0
+    specifier: ^1.8.0
+    version: 1.8.0
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.0(@sveltejs/kit@1.15.7)
@@ -21,6 +28,9 @@ devDependencies:
   '@tailwindcss/forms':
     specifier: ^0.5.3
     version: 0.5.3(tailwindcss@3.3.1)
+  '@types/luxon':
+    specifier: ^3.3.0
+    version: 3.3.0
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.45.0
     version: 5.59.0(@typescript-eslint/parser@5.59.0)(eslint@8.39.0)(typescript@5.0.4)
@@ -391,9 +401,10 @@ packages:
       selderee: 0.11.0
     dev: false
 
-  /@skeletonlabs/skeleton@1.2.0:
-    resolution: {integrity: sha512-WM+vPS3kf2b9bnN4Gr8YpMjRj7Z6gNNgGLeRlmcS50lotpH5oGpbiGh8oxf/j2j0cJeHv2bIwtXkqISuypZs+Q==}
+  /@skeletonlabs/skeleton@1.8.0:
+    resolution: {integrity: sha512-dO4ukU34MGUY1yA1Gln+YUFEEew25AHm6GMpbzCOX8p8b9NmVBWiSuF3me9jnbrV15TGJxmUGzdiRN/70b4KIg==}
     dependencies:
+      esm-env: 1.0.0
       svelte: 3.58.0
     dev: true
 
@@ -468,6 +479,10 @@ packages:
 
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/luxon@3.3.0:
+    resolution: {integrity: sha512-uKRI5QORDnrGFYgcdAVnHvEIvEZ8noTpP/Bg+HeUzZghwinDlIS87DEenV5r1YoOF9G4x600YsUXLWZ19rmTmg==}
     dev: true
 
   /@types/pug@2.0.6:
@@ -1515,6 +1530,11 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /luxon@3.3.0:
+    resolution: {integrity: sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==}
+    engines: {node: '>=12'}
+    dev: false
 
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}

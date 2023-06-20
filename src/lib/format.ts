@@ -1,3 +1,6 @@
+import { DateTime } from "luxon";
+
 export function dateFormatter(date: Date): string {
-    return date.toLocaleTimeString('da-DK', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const datetime = DateTime.fromJSDate(date).setLocale('da');
+    return `${datetime.toLocaleString(DateTime.DATE_HUGE)} (${datetime.toRelative({ unit: ["years", "months", "weeks", "days"] })})`;
 }
