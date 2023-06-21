@@ -30,12 +30,13 @@ export interface CalendarEvent {
 
 export async function getEvents(fetch: any): Promise<CalendarEvent[]> {
     // const cached = await redis.get('events');
+    const cached = false;
     let json;
 
     if (!cached) {
         const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/71apas278bprfrjbnkmhq2jne8%40group.calendar.google.com/events?key=${GOOGLE_CAL_KEY}&singleEvents=true&orderBy=startTime`);
         if (!response.ok) {
-          throw error(response.status, `Failed to fetch events: ${response.statusText}`)
+            throw error(response.status, `Failed to fetch events: ${response.statusText}`)
         }
         json = await response.json();
         // await redis.set('events', JSON.stringify(json), 'EX', 60 * 60);
@@ -65,7 +66,7 @@ export async function getEvent(id: string, fetch: any): Promise<CalendarEvent> {
     const events = await getEvents(fetch);
     const event = events.find((event) => event.id === id);
     if (!event) {
-      throw error(404, 'Event not found');
+        throw error(404, 'Event not found');
     }
     return event;
 }
