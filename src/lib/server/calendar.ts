@@ -1,6 +1,6 @@
 import { GOOGLE_CAL_KEY } from '$env/static/private';
 import { error } from '@sveltejs/kit';
-import { redis } from './redis';
+// import { redis } from './redis';
 
 interface RawCalendarEvent {
     id: string;
@@ -29,7 +29,7 @@ export interface CalendarEvent {
 }
 
 export async function getEvents(fetch: any): Promise<CalendarEvent[]> {
-    const cached = await redis.get('events');
+    // const cached = await redis.get('events');
     let json;
 
     if (!cached) {
@@ -38,7 +38,7 @@ export async function getEvents(fetch: any): Promise<CalendarEvent[]> {
           throw error(response.status, `Failed to fetch events: ${response.statusText}`)
         }
         json = await response.json();
-        await redis.set('events', JSON.stringify(json), 'EX', 60 * 60);
+        // await redis.set('events', JSON.stringify(json), 'EX', 60 * 60);
     } else {
         json = JSON.parse(cached);
     }
