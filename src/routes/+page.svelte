@@ -5,7 +5,7 @@
 
   export let data: PageData;
   let { events } = data;
-  events.length = 5;
+  if (events.length > 5) events.length = 5;
 
   let heroElement: HTMLDivElement;
   $: if (heroElement)
