@@ -39,10 +39,14 @@
       : url !== "/" && $page.url.pathname.includes(url);
 
   onMount(async () => {
-    if ($heroImageStore) return;
-    const response = await fetch("/images/HoleEighteen.jpg");
-    const url = URL.createObjectURL(await response.blob());
-    heroImageStore.set(url);
+    if ($heroImageStore.url || $heroImageStore.isSimplified) return;
+    try {
+      const response = await fetch("/images/HoleEighteen.jpg", {signal: AbortSignal.timeout(8000)});
+      const url = URL.createObjectURL(await response.blob());
+      heroImageStore.update((store) => ({ ...store, url }));
+    } catch (error) {
+      heroImageStore.update((store) => ({ ...store, isSimplified: true }));
+    }
   });
 </script>
 
@@ -80,7 +84,7 @@
   </ul>
 </Drawer>
 
-{#if !$heroImageStore && $page.url.pathname === "/"}
+{#if (!$heroImageStore.url && !$heroImageStore.isSimplified) && $page.url.pathname === "/"}
   <div class="relative w-screen h-screen">
     <div
       class="absolute w-40 h-40 top-[50%] left-[50%]"

@@ -8,8 +8,8 @@
   if (events.length > 5) events.length = 5;
 
   let heroElement: HTMLDivElement;
-  $: if (heroElement)
-    heroElement.style.backgroundImage = `url(${$heroImageStore})`;
+  $: if (heroElement && $heroImageStore.url && !$heroImageStore.isSimplified)
+    heroElement.style.backgroundImage = `url(${$heroImageStore.url})`;
 
   let innerHeight: number = 0;
 
@@ -26,27 +26,43 @@
 
 <svelte:window bind:innerHeight />
 
-<div
-  bind:this={heroElement}
-  id="hero"
-  class="w-screen h-screen bg-center bg-no-repeat bg-cover"
->
+{#if !$heroImageStore.isSimplified}
   <div
-    class="relative top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-center"
+    bind:this={heroElement}
+    id="hero"
+    class="w-screen h-screen bg-center bg-no-repeat bg-cover"
   >
-    <h1 class="unstyled text-6xl lg:text-8xl font-bold">
+    <div
+      class="relative top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-center"
+    >
+      <h1 class="unstyled text-6xl lg:text-8xl font-bold">
+        <span
+          class="bg-gradient-to-br from-primary-600 to-primary-800 bg-clip-text text-transparent box-decoration-clone"
+          >Eghjorten Disc Golf Klub</span
+        >
+      </h1>
+      <p class="unstyled text-xl lg:text-3xl text-white mt-2">
+        Disc Golf rundt om Eghjorten i Hillerød
+      </p>
+    </div>
+  </div>
+{/if}
+
+<div class="page-container">
+  {#if $heroImageStore.isSimplified}
+    <p class="unstyled text-xl lg:text-3xl text-gray-500">
+      (viser simpel version af siden pga. langsom internetforbindelse)
+    </p>
+    <h1 class="unstyled text-5xl lg:text-8xl font-bold !my-0">
       <span
         class="bg-gradient-to-br from-primary-600 to-primary-800 bg-clip-text text-transparent box-decoration-clone"
         >Eghjorten Disc Golf Klub</span
       >
     </h1>
-    <p class="unstyled text-xl lg:text-3xl text-white mt-2">
+    <p class="unstyled text-xl lg:text-3xl text-white !mt-4">
       Disc Golf rundt om Eghjorten i Hillerød
     </p>
-  </div>
-</div>
-
-<div class="page-container">
+  {/if}
   <section
     class="p-4 md:p-10 container mx-auto flex flex-col items-center gap-4 text-center"
   >
